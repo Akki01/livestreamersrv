@@ -18,7 +18,7 @@ except:
 from urllib import unquote
 
 HOST_NAME = ""
-PORT_NUMBER = 88
+PORT_NUMBER = 8088
 LIVESTREAMER = None
 
 
@@ -85,6 +85,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 def start():
     global LIVESTREAMER
     LIVESTREAMER = Livestreamer()
+    LIVESTREAMER.set_option("http-headers", "referrer=https://www.rampant.tv/channels")
     httpd = ThreadedHTTPServer((HOST_NAME, PORT_NUMBER), StreamHandler)
     print time.asctime(), "Server Starts - %s:%s" % (HOST_NAME, PORT_NUMBER)
     try:
